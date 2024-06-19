@@ -48,12 +48,14 @@ class SingleLinkedLists {
             current = current.next;
         }
 
+
+        
         const deletedNode = this.tail;
         this.tail = newTail;
         this.tail.next = null;
         this.length--;
         return deletedNode;
-
+        
     }
 
 
@@ -62,6 +64,7 @@ class SingleLinkedLists {
 const list = new SingleLinkedLists();
 list.push(1);
 list.push(2);
+list.push(3);
 console.log(list);
 list.pop();
 console.log(list);
