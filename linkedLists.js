@@ -24,8 +24,6 @@ class SingleLinkedLists {
             this.tail = newNode;
         }
         this.length++;
-        //console.log(newNode)
-        //console.log(this);
         return this;
     }
 
@@ -106,17 +104,86 @@ class SingleLinkedLists {
         return node;
     }
 
+    insert(index, value) {
+        
+        if(index < 1 || index > this.length) return null;
+        if(index === 1) {
+            this.unshift(value);
+            return this;
+        }
+            if(index === this.length) {
+            this.push(value);
+            return this;
+        }
+            
+        const newNode = new Node(value);
+        const beforeNode = this.get(index - 1);
+        const afterNode = beforeNode.next;
+
+        beforeNode.next = newNode;
+        newNode.next = afterNode;
+        this.length++;
+        return this;
+    }
+
+    remove(index) {
+
+        if(index < 1 || index > this.length) return null;
+        if(index === 1) {
+            this.shift;
+            return;
+        }
+        if(index === this.length) {
+            this.pop();
+            return;
+        }
+
+        const beforeNode = this.get(index - 1);
+        const deletedNode = beforeNode.next;
+        beforeNode.next = beforeNode.next.next;
+        this.length--;
+        return deletedNode;
+    }
+
+    reverse() {
+
+        if(this.length < 2) return;
+        
+        let movingNode = this.head;
+        this.head = this.tail;
+        this.tail = movingNode;
+
+        let nextNode;
+        let previousNode = null;
+
+        //general logic - build up previousNode in reverse order and then append to new head
+        for (let i = 0; i < this.length; i++) {
+            nextNode = movingNode.next;
+            movingNode.next = previousNode;
+            previousNode = movingNode;
+            movingNode = nextNode;
+        }
+    }
+
+
 }
 
 const list = new SingleLinkedLists();
 list.push(1);
 list.push(2);
 list.push(3);
+//list.push(4);
+//list.push(5);
+
 //console.log(list);
 //list.unshift(4);
-console.log(list);
+//console.log(list);
 //console.log(list.get(2));
-console.log(list.set(1, 11));
+//console.log(list.set(1, 11));
+//console.log(list.insert(2, 30));
+//console.log(list.remove(2));
+list.reverse();
+console.log(list);
 
 //list.pop();
 //list.shift();
